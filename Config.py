@@ -1,9 +1,12 @@
 import configparser
 
-PROPERTY_FILE = 'Wunderlist_auth.properties'
-PROPERTY_FILE = 'Wunderlist.properties'
+PROPERTY_AUTH = 'Wunderlist_auth.properties'
+conf_auth = configparser.SafeConfigParser()
+conf_auth.read(PROPERTY_AUTH)
+
+PROOERTY_SETTING = 'Wunderlist.properties'
 conf = configparser.SafeConfigParser()
-conf.read(PROPERTY_FILE)
+conf.read(PROOERTY_SETTING)
 
 if __name__ == '__main__':
     for section in conf.sections():
@@ -11,8 +14,8 @@ if __name__ == '__main__':
         for key in conf.options(section):
             print(conf.get(section, key))
 
-CLIENT_ID = conf.get('AUTH_INFO', 'client_id')
-ACCESS_TOKEN = conf.get('AUTH_INFO', 'access_token')
+CLIENT_ID = conf_auth.get('AUTH_INFO', 'client_id')
+ACCESS_TOKEN = conf_auth.get('AUTH_INFO', 'access_token')
 
 URL_LISTS = conf.get('URL', 'url_lists')
 URL_TASKS = conf.get('URL', 'url_tasks')
